@@ -1,0 +1,32 @@
+.order-form {
+  width: 50% !important;
+  margin: auto;
+  margin-top: 10%;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+.order-form label {
+  margin-top: 15px;
+}
+
+.order-form .form-group {
+  width: 300px !important;
+  margin-right: 50px;
+}
+
+.order-form button {
+  margin-top: 20px;
+  border: none !important;
+  background-color: #fec5bb !important;
+  width: 100px;
+  height: 35px;
+  color: black !important;
+}
+
+.order-form button:hover {
+  background-color: #ffe8d6 !important;
+  color: black !important;
+}

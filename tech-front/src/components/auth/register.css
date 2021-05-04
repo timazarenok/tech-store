@@ -1,0 +1,36 @@
+.register-form {
+  width: 50% !important;
+  margin: auto;
+  margin-top: 10%;
+}
+
+h1 {
+font-weight: bold;
+}
+
+.register-form label {
+  margin-top: 15px;
+}
+
+.register-form .form-group {
+  width: 300px !important;
+  margin-right: 50px;
+}
+
+.register-form button {
+  margin-top: 20px;
+  border: none !important;
+  background-color: #fec5bb !important;
+  width: 120px;
+  height: 35px;
+  color: black !important;
+}
+
+.register-form button:hover {
+  background-color: #ffe8d6 !important;
+  color: black !important;
+}
+
+body {
+  background-color: #edf6f9 !important;
+}

@@ -1,0 +1,16 @@
+.main-block {
+  margin: 50px;
+}
+
+.products {
+  display: inline;
+  width: 80%;
+  margin: auto;
+  list-style: none;
+  padding: 0;
+}
+
+.products li {
+  display: inline-block;
+  margin-left: 20px;
+}

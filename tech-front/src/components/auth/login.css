@@ -1,0 +1,46 @@
+.login-from {
+  width: 40% !important;
+  margin: auto;
+  margin-top: 10%;
+}
+
+h1 {
+font-weight: bold;
+}
+
+.login-from label {
+  margin-top: 15px;
+}
+
+.login-from .input-group {
+  width: 300px !important;
+}
+
+.login-from button {
+  margin-top: 20px;
+  border: none !important;
+  background-color: #fec5bb !important;
+  width: 100px;
+  height: 35px;
+  color: black !important;
+}
+
+.login-from button:hover {
+  background-color: #ffe8d6 !important;
+  color: black !important;
+}
+
+.register-button {
+  margin-top: 20px;
+  border: none !important;
+  background-color: #fec5bb !important;
+  width: 120px !important;
+  height: 35px;
+  margin-left: 20px;
+  color: black !important;
+}
+
+.register-button:hover {
+  background-color: #ffe8d6 !important;
+  color: black !important;
+}
