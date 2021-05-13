@@ -24,7 +24,6 @@ class AddProduct extends Component {
       description: this.state.description,
       price: this.state.price,
     };
-
     axios
       .post("http://localhost:3000/api/products/add", product)
       .then((res) => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, useSelector} from "react-redux";
 import { logoutUser } from "../../redux/actions/authActions";
 import { Shop } from "react-bootstrap-icons";
 
@@ -13,7 +13,9 @@ const Header = (props) => {
     props.logoutUser();
   };
 
-  const { user } = props.auth;
+  const { cart_items } = useSelector(({ cart }) => cart);
+
+  const { user } = useSelector(({ auth }) => auth);
   return (
     <div>
       <header>
@@ -58,11 +60,22 @@ const Header = (props) => {
                   <Link
                     to="/profile"
                     style={{
-                      display: (user.email === undefined || user.email === "admin@gmail.com") ? "none" : "block",
+                      display: user.email === undefined ? "none" : "block",
                     }}
                     className="nav-link"
                   >
                     Заказы
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/cart"
+                    style={{
+                      display: user.email === undefined ? "none" : "block",
+                    }}
+                    className="nav-link"
+                  >
+                    Корзина {cart_items.length === 0 ? null : <span>{cart_items.length}</span>}
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -102,6 +115,7 @@ Header.propTypes = {
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  cart: state.cart
 });
 
 export default connect(mapStateToProps, { logoutUser })(Header);

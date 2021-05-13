@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-
 // Load product model
 const { Product } = require("../../models");
 
 // @route POST api/add
 // @description add/save product
 // @access Public
+
 router.post("/add", (req, res) => {
+  console.log("here1");
   Product.create({
     name: req.body.name,
     description: req.body.description,
@@ -16,9 +17,10 @@ router.post("/add", (req, res) => {
     price: req.body.price,
   })
     .then((product) => res.json({ msg: "Product added successfully" }))
-    .catch((err) =>
-      res.status(400).json({ error: "Unable to add this product" })
-    );
+    .catch((err) => {
+      console.log("here" + err);
+      res.status(400).json({ error: "Unable to add this product" });
+    });
 });
 
 // @route GET api/products
@@ -38,10 +40,15 @@ router.get("/", (req, res) => {
 router.delete("/:id", (req, res) => {
   Product.destroy({
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
   })
-    .then((product) => res.json({ mgs: "product entry deleted successfully", properties: Property.findAll() }))
+    .then((product) =>
+      res.json({
+        mgs: "product entry deleted successfully",
+        properties: Property.findAll(),
+      })
+    )
     .catch((err) => res.status(404).json({ error: "No such product" }));
 });
 
@@ -49,14 +56,15 @@ router.delete("/:id", (req, res) => {
 // @description Update product
 // @access Public
 router.put("/product/:id/edit", (req, res) => {
-  Product.update({
-    name: req.body.name,
-    description: req.body.description,
-    imageUrl: req.body.imageUrl,
-    price: req.body.price,
-  }, 
-    { where: { id: req.params.id }
-  })
+  Product.update(
+    {
+      name: req.body.name,
+      description: req.body.description,
+      imageUrl: req.body.imageUrl,
+      price: req.body.price,
+    },
+    { where: { id: req.params.id } }
+  )
     .then((product) => res.json({ msg: "Updated successfully" }))
     .catch((err) =>
       res.status(400).json({ error: "Unable to update the Database" })

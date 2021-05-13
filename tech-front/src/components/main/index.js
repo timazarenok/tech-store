@@ -2,13 +2,15 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
+import { Add } from "../../redux/actions/cartActions";
 import InfoBlock from "../infoblock";
 import ProductItem from "./product-item";
 import "./main.css";
 
-import product1Image from '../../images/product1.png'
+import product1Image from "../../images/product1.png";
+import axios from "axios";
 
-const Main = () => {
+const Main = (props) => {
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -36,7 +38,9 @@ const Main = () => {
     },
   ]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/products').then(response => setProducts(response.data))
+  }, [products.length]);
 
   return (
     <div className="main-block">
@@ -44,7 +48,7 @@ const Main = () => {
       <ul className="products">
         {products.map((el) => (
           <li>
-            <ProductItem {...el} />
+            <ProductItem {...el} AddToCart={props.AddToCart} />
           </li>
         ))}
       </ul>
@@ -54,6 +58,10 @@ const Main = () => {
 };
 
 export default connect(
-  (state) => ({}),
-  (dispatch) => ({})
+  (state) => ({
+    cart: state.cart,
+  }),
+  (dispatch) => ({
+    AddToCart: (el) => dispatch(Add(el)),
+  })
 )(Main);

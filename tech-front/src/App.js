@@ -20,6 +20,7 @@ import PrivateRoute from './components/routes/private-route'
 import Profile from './components/profile'
 import AdminRoute from './components/routes/admin-route'
 import Admin from './components/admin'
+import Cart from './components/cart'
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -48,6 +49,7 @@ const App = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/order-form' component={OrderForm} />
         <Route exact path='/' component={Main} />
+        <Route exact path='/cart' component={Cart} />
         <Switch>
           <PrivateRoute exact path="/profile" component={Profile} />
           <AdminRoute exact path="/admin" component={Admin} />
