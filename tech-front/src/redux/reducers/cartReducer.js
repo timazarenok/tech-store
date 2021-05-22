@@ -25,7 +25,6 @@ export default (state = initialState, action) => {
               ? { ...el, count: newItem.count }
               : el;
           });
-      console.log(state.cart_items);
       return { ...state, cart_items: newItems };
     }
     case DELETE_FROM_CART: {

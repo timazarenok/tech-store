@@ -9,16 +9,15 @@ const { Order } = require("../../models");
 // @access Public
 
 router.post("/add", (req, res) => {
-  Order.create({    
-  login: req.body.login,
-  address: req.body.address,
-  email: req.body.email,
-  product: req.body.product
-})
-  .then((order) => res.json({ msg: "Order added successfully" }))
-  .catch((err) =>
-    res.status(400).json({ error: "Unable to add this order" })
-  );
+  Order.create({
+    telephone: req.body.telephone,
+    address: req.body.address,
+    product: req.body.product,
+  })
+    .then((order) => res.json({ msg: "Order added successfully" }))
+    .catch((err) =>
+      res.status(400).json({ error: "Unable to add this order" })
+    );
 });
 
 // @route GET api/orders
@@ -37,10 +36,10 @@ router.get("/orders", (req, res) => {
 // @access Public
 router.delete("/order/:id", (req, res) => {
   Order.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
+    where: {
+      id: req.params.id,
+    },
+  })
     .then((order) => res.json({ mgs: "Order entry deleted successfully" }))
     .catch((err) => res.status(404).json({ error: "No such order" }));
 });
@@ -62,9 +61,7 @@ router.put("/order/:id", (req, res) => {
 router.get("/order/:id", (req, res) => {
   Order.findById(req.params.id)
     .then((order) => res.json(order))
-    .catch((err) =>
-      res.status(404).json({ noinquiryfound: "No order found" })
-    );
+    .catch((err) => res.status(404).json({ noinquiryfound: "No order found" }));
 });
 
 module.exports = router;

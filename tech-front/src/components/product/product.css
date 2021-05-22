@@ -1,0 +1,49 @@
+.card-show {
+  width: 1000px;
+  height: 100%;
+  margin: auto;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.card-show-img {
+  width: 500px !important;
+  height: 400px;
+}
+
+.ingredient-title, .card-show-title {
+  font-size: 25px;
+  font-weight: 600 !important;
+  color: #fec5bb;
+  text-align: center;
+}
+
+.list-group {
+  margin-left: 20px;
+}
+
+.card-show-description {
+  font-size: 20px;
+}
+
+.card-show-price {
+  font-size: 25px;
+  font-weight: 600 !important;
+  color: #fec5bb;
+}
+
+.buy{
+  margin-top: 20px;
+  background-color: #fec5bb !important;
+  border: none !important;
+}
+
+.buy-block {
+  margin-top: 30px;
+}
+
+.price {
+  color: #fec5bb !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+}

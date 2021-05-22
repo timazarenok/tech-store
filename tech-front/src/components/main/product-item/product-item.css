@@ -1,5 +1,5 @@
 .card {
-  width: 400px;
+  width: 420px;
   height: 500px;
 }
 
@@ -24,6 +24,18 @@
   margin-left: 20px;
   margin-bottom: 10px;
   border: none;
+}
+
+.card-button-more {
+  display: inline;
+  height: 35px;
+  background-color: #fec5bb !important;
+  color: black !important;
+  text-align: center;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border: none;
+  width: 120px;
 }
 
 .card-link {

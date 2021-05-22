@@ -1,10 +1,6 @@
-module.exports = (Sequelize, sequelize) => 
+module.exports = (Sequelize, sequelize) =>
   sequelize.define("order", {
-    login: {
-      type: Sequelize.STRING,
-      // required: true
-    },
-    email: {
+    telephone: {
       type: Sequelize.STRING,
       // required: true
     },
@@ -15,5 +11,5 @@ module.exports = (Sequelize, sequelize) =>
     product: {
       type: Sequelize.STRING,
       // required: true
-    }
-  })
+    },
+  });

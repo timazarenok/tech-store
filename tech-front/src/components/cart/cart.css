@@ -2,3 +2,12 @@
   list-style: none;
   width: 60%;
 }
+
+.order-form {
+  width: 70%;
+  margin: auto;
+}
+
+.order-form button {
+  width: 200px;
+}

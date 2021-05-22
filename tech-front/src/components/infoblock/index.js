@@ -9,34 +9,34 @@ import { Button } from "react-bootstrap";
 
 const InfoBlock = () => (
   <div className="container">
-    <div class="row">
-      <div class="col-md-6 team-img">
+    <div className="row">
+      <div className="col-md-6 team-img">
         <img className="img-big" src={box1} alt="sales" />
         <figcaption className="overlay">
           <Button className="sale-button">Подробнее</Button>
         </figcaption>
       </div>
-      <div class="col-md-6 team-img">
+      <div className="col-md-6 team-img">
         <img className="img-big" src={box2} alt="sales" />
         <figcaption className="overlay">
           <Button className="sale-button">Подробнее</Button>
         </figcaption>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4 team-img">
+    <div className="row">
+      <div className="col-md-4 team-img">
         <img className="img-small" src={box4} alt="sales" />
         <figcaption className="overlay">
           <Button className="sale-button">Подробнее</Button>
         </figcaption>
       </div>
-      <div class="col-md-4 team-img">
+      <div className="col-md-4 team-img">
         <img className="img-small" src={box5} alt="sales" />
         <figcaption className="overlay">
           <Button className="sale-button">Подробнее</Button>
         </figcaption>
       </div>
-      <div class="col-md-4 team-img">
+      <div className="col-md-4 team-img">
         <img className="img-small" src={box6} alt="sales" />
         <figcaption className="overlay">
           <Button className="sale-button">Подробнее</Button>

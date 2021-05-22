@@ -11,32 +11,7 @@ import product1Image from "../../images/product1.png";
 import axios from "axios";
 
 const Main = (props) => {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Test",
-      image: product1Image,
-      description:
-        "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest",
-      price: 125,
-    },
-    {
-      id: 2,
-      name: "Test",
-      image: product1Image,
-      description:
-        "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest",
-      price: 125,
-    },
-    {
-      id: 3,
-      name: "Test",
-      image: product1Image,
-      description:
-        "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest",
-      price: 125,
-    },
-  ]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/products').then(response => setProducts(response.data))

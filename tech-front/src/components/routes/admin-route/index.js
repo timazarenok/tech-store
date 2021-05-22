@@ -10,7 +10,7 @@ const AdminRoute = ({ component: Component, auth, ...rest }) => (
       auth.user.email === "admin@gmail.com" ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/admin" />
+        <Redirect to="/" />
       )
     }
   />

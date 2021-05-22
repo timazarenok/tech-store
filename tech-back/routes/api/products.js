@@ -9,12 +9,13 @@ const { Product } = require("../../models");
 // @access Public
 
 router.post("/add", (req, res) => {
-  console.log("here1");
   Product.create({
     name: req.body.name,
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     price: req.body.price,
+    colorId: req.body.colorId,
+    manufacturerId: req.body.manufacturerId,
   })
     .then((product) => res.json({ msg: "Product added successfully" }))
     .catch((err) => {
@@ -74,7 +75,7 @@ router.put("/product/:id/edit", (req, res) => {
 // @route GET api/property/:id
 // @description Get single property by id
 // @access Public
-router.get("/product/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   Product.findByPk(req.params.id)
     .then((product) => res.json(product))
     .catch((err) =>

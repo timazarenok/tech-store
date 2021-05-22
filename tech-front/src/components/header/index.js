@@ -58,17 +58,6 @@ const Header = (props) => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="/profile"
-                    style={{
-                      display: user.email === undefined ? "none" : "block",
-                    }}
-                    className="nav-link"
-                  >
-                    Заказы
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
                     to="/cart"
                     style={{
                       display: user.email === undefined ? "none" : "block",
