@@ -13,6 +13,18 @@ const Color = require("./color.model")(Sequelize, sequelize);
 Manufacturer.hasOne(Product, { onDelete: 'cascade' })
 Color.hasOne(Product, { onDelete: 'cascade' })
 
+Order.belongsToMany(Product, {
+  through: "order_product",
+  as: "products",
+  foreignKey: "product_id",
+});
+
+Product.belongsToMany(Order, {
+  through: "order_product",
+  as: "orders",
+  foreignKey: "order_id",
+});
+
 module.exports.Order = Order;
 module.exports.Product = Product;
 module.exports.User = User;

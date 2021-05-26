@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Load order model
-const { Order } = require("../../models");
+const { Order, Product } = require("../../models");
 
 // @route POST api/add
 // @description add/save order
@@ -14,17 +14,57 @@ router.post("/add", (req, res) => {
     address: req.body.address,
     product: req.body.product,
   })
-    .then((order) => res.json({ msg: "Order added successfully" }))
+    .then((order) => res.json(order))
     .catch((err) =>
       res.status(400).json({ error: "Unable to add this order" })
     );
 });
 
+router.post("/orders/:id/add-product/:product_id", (req,res) => {
+  return Order.findByPk(req.params.id)
+    .then((order) => {
+      if (!order) {
+        res.json("Order not found!");
+        return null;
+      }
+      Product.findByPk(req.params.product_id).then((product) => {
+        if (!product) {
+          res.json("Product not found!");
+          return null;
+        }
+
+        order.addProduct(product);
+        res.json({msg: `added Product id=${product.id} to Order id=${order.id}`});
+        return tag;
+      });
+    })
+    .catch((err) => {
+      res.json("Error while adding Product to Order: ", err);
+    });
+})
 // @route GET api/orders
 // @description Get all orders
 // @access Public
 router.get("/orders", (req, res) => {
-  Order.findAll()
+  Order.findAll({
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: [
+          "id",
+          "name",
+          "description",
+          "price",
+          "manufacturerId",
+          "colorId",
+        ],
+        through: {
+          attributes: ["order_id", "product_id"],
+        },
+      },
+    ],
+  })
     .then((orders) => res.json(orders))
     .catch((err) =>
       res.status(404).json({ noinquiriesfound: "No orders found" })
@@ -59,7 +99,25 @@ router.put("/order/:id", (req, res) => {
 // @description Get single order by id
 // @access Public
 router.get("/order/:id", (req, res) => {
-  Order.findById(req.params.id)
+  Order.findById(req.params.id, {
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: [
+          "id",
+          "name",
+          "description",
+          "price",
+          "manufacturerId",
+          "colorId",
+        ],
+        through: {
+          attributes: ["order_id", "product_id"],
+        },
+      },
+    ],
+  })
     .then((order) => res.json(order))
     .catch((err) => res.status(404).json({ noinquiryfound: "No order found" }));
 });

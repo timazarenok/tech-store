@@ -22,13 +22,13 @@
 }
 
 .submit-button:hover {
-  background-color: #ffe8d6 !important;
+  background-color: #0e6ba8  !important;
   color: black !important;
 }
 
 .header {
   margin: auto;
-  color: #fec5bb;
+  color: #44a1a0;
   margin-bottom: 20px;
 }
 

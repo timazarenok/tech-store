@@ -14,7 +14,7 @@
 .ingredient-title, .card-show-title {
   font-size: 25px;
   font-weight: 600 !important;
-  color: #fec5bb;
+  color: #44a1a0;
   text-align: center;
 }
 
@@ -29,12 +29,12 @@
 .card-show-price {
   font-size: 25px;
   font-weight: 600 !important;
-  color: #fec5bb;
+  color: #44a1a0;
 }
 
 .buy{
   margin-top: 20px;
-  background-color: #fec5bb !important;
+  background-color: #44a1a0 !important;
   border: none !important;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .price {
-  color: #fec5bb !important;
+  color: #44a1a0 !important;
   font-weight: 600 !important;
   font-size: 20px !important;
 }

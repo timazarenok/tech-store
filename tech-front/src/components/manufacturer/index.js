@@ -5,20 +5,9 @@ import { Button } from "react-bootstrap";
 
 import "./manufacturers.css";
 
-const Manufacturers = () => {
-  const [data, setData] = useState([]);
+const Manufacturers = ({manufacturers, updateData}) => {
   const [manufacturer, setManufacturer] = useState("");
 
-  useEffect(() => {
-    updateData();
-  }, [data.length]);
-
-  const updateData = () => {
-    axios
-      .get("http://localhost:3000/api/manufacturers")
-      .then((response) => setData(response.data))
-      .catch((err) => console.log(err));
-  };
   const addNew = () => {
     axios
       .post("http://localhost:3000/api/manufacturers/add", {
@@ -67,7 +56,7 @@ const Manufacturers = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((el) => (
+          {manufacturers.map((el) => (
             <tr>
               <td>{el.name}</td>
               <td>

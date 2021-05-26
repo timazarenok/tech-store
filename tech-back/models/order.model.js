@@ -8,8 +8,4 @@ module.exports = (Sequelize, sequelize) =>
       type: Sequelize.STRING,
       // required: true
     },
-    product: {
-      type: Sequelize.STRING,
-      // required: true
-    },
   });

@@ -5,20 +5,9 @@ import { Button } from "react-bootstrap";
 
 import "./colors.css";
 
-const Colors = () => {
-  const [data, setData] = useState([]);
+const Colors = ({colors, updateData}) => {
   const [color, setColor] = useState("");
-
-  useEffect(() => {
-    updateData();
-  }, [data.length]);
-
-  const updateData = () => {
-    axios
-      .get("http://localhost:3000/api/colors")
-      .then((response) => setData(response.data))
-      .catch((err) => console.log(err));
-  };
+  
   const addNew = () => {
     axios
       .post("http://localhost:3000/api/colors/add", { name: color })
@@ -65,7 +54,7 @@ const Colors = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((el) => (
+          {colors.map((el) => (
             <tr>
               <td>{el.name}</td>
               <td>

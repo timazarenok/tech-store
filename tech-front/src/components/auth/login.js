@@ -10,12 +10,13 @@ import "./login.css";
 const Login = (props) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({email: "", password: ""});
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {
       props.history.push("/profile");
     }
-  });
+  }, [errors != {email: "", password: ""}]);
 
   const onChangeLogin = (e) => {
     setLogin(e.target.value);
@@ -32,7 +33,9 @@ const Login = (props) => {
       password: password,
     };
     props.loginUser(userData);
-    if(login === "admin@gmail.com") {
+    setErrors(props.errors);
+    console.log(props.errors)
+    if (login === "admin@gmail.com" && props.auth.isAuthenticated) {
       props.history.push("/admin");
     }
   };
@@ -47,6 +50,7 @@ const Login = (props) => {
           value={login}
           onChange={onChangeLogin}
         />
+        <span className="text-danger font-weight-bold">{errors.email}</span>
       </InputGroup>
       <Form.Label>Пароль</Form.Label>
       <InputGroup>
@@ -56,6 +60,7 @@ const Login = (props) => {
           value={password}
           onChange={onChangePassword}
         />
+        <span className="text-danger font-weight-bold">{errors.password}</span>
       </InputGroup>
       <Button onClick={onSubmitForm}>Войти</Button>
       <Button
@@ -76,6 +81,6 @@ Login.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.auth.errors,
 });
 export default connect(mapStateToProps, { loginUser })(Login);

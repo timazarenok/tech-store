@@ -16,13 +16,15 @@ const Product = (props) => {
         setData(response.data);
         axios
           .get("http://localhost:3000/api/colors/" + response.data.colorId)
-          .then((response) => setColor(response.data.name));
+          .then((response) => setColor(response.data.name))
+          .catch(err => console.log(err))
         axios
           .get(
             "http://localhost:3000/api/manufacturers/" +
               response.data.manufacturerId
           )
-          .then((response) => setManufacturer(response.data.name));
+          .then((response) => setManufacturer(response.data.name))
+          .catch(err => console.log(err))
       })
       .catch((err) => console.log(err));
   }, [data != {}]);

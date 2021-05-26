@@ -17,7 +17,7 @@ const ProductItem = ({ id, name, image, description, price, AddToCart }) => {
         </Card.Text>
         <Button
           className="card-button"
-          onClick={() => AddToCart({ id: id, count: 1 })}
+          onClick={() => AddToCart({ id: id, name: name, price: price, count: 1 })}
         >
           Купить
         </Button>

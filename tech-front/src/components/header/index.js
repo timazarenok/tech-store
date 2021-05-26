@@ -13,7 +13,7 @@ const Header = (props) => {
     props.logoutUser();
   };
 
-  const { cart_items } = useSelector(({ cart }) => cart);
+  const { totalCount } = useSelector(({ cart }) => cart);
 
   const { user } = useSelector(({ auth }) => auth);
   return (
@@ -21,9 +21,9 @@ const Header = (props) => {
       <header>
         <div className="top-nav">
           <nav className="navbar navbar-expand-lg">
-            <a className="navbar-brand text-uppercase" href="/">
+            <Link className="navbar-brand text-uppercase" to="/">
               Техник-мастер <Shop />
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -46,6 +46,11 @@ const Header = (props) => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link to="/catalog" className="nav-link">
+                    Каталог
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link
                     to="/login"
                     style={{
@@ -64,7 +69,7 @@ const Header = (props) => {
                     }}
                     className="nav-link"
                   >
-                    Корзина {cart_items.length === 0 ? null : <span>{cart_items.length}</span>}
+                    Корзина {totalCount === 0 ? null : <span>{totalCount}</span>}
                   </Link>
                 </li>
                 <li className="nav-item">

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Load product model
-const { Product } = require("../../models");
+const { Order, Product } = require("../../models");
 
 // @route POST api/add
 // @description add/save product
@@ -28,7 +28,18 @@ router.post("/add", (req, res) => {
 // @description Get all products
 // @access Public
 router.get("/", (req, res) => {
-  Product.findAll()
+  Product.findAll({
+    include: [
+      {
+        model: Order,
+        as: "orders",
+        attributes: ["id", "telephone", "address"],
+        through: {
+          attributes: ["order_id", "product_id"],
+        },
+      },
+    ],
+  })
     .then((products) => res.json(products))
     .catch((err) =>
       res.status(404).json({ noinquiriesfound: "No products found" })

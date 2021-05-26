@@ -12,12 +12,13 @@ const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [errors, setErrors] = useState({email: "", password: ""});
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {
       props.history.push("/orders");
     }
-  });
+  }, [errors != {email: "", password: ""}]);
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -44,9 +45,9 @@ const Register = (props) => {
       password2: password2,
     };
     props.registerUser(newUser, props.history);
+    setErrors(props.errors);
   };
 
-  const errors = { name: "", login: "", password: "", password2: "" };
   return (
     <Form className="register-form" onSubmit={onSubmit}>
       <h1>Регистрация</h1>
@@ -120,6 +121,6 @@ Register.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.auth.errors,
 });
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));

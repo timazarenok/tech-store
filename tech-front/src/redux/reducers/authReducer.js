@@ -1,9 +1,10 @@
-import {SET_CURRENT_USER, USER_LOADING} from '../constants'
-import isEmpty from 'is-empty'
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "../constants";
+import isEmpty from "is-empty";
 
 const initialState = {
   isAuthenticated: false,
   user: {},
+  errors: { email: "", password: "" },
   loading: false,
 };
 
@@ -20,7 +21,12 @@ export default (state = initialState, action) => {
         ...state,
         loading: true,
       };
+    case GET_ERRORS:
+      return {
+        ...state,
+        errors: { ...state.errors, ...action.payload.data },
+      };
     default:
       return state;
   }
-}
+};

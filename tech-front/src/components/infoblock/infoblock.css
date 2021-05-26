@@ -71,7 +71,7 @@
 .sale-button {
   width: 120px;
   height: 35px;
-  background-color: #fec5bb !important;
+  background-color: #44a1a0  !important;
   color: black !important;
   text-align: center;
   margin-left: 20px;
@@ -80,11 +80,11 @@
 }
 
 .sale-button:hover {
-  background-color: #ffe8d6 !important;
+  background-color:  #0e6ba8 d6 !important;
   color: black !important;
 }
 
 .sale-button:active {
-  background-color: #ffe8d6;
+  background-color:  #0e6ba8;
   color: black;
 }
