@@ -8,4 +8,8 @@ module.exports = (Sequelize, sequelize) =>
       type: Sequelize.STRING,
       // required: true
     },
+    status: {
+      type: Sequelize.BOOLEAN,
+      // required: true
+    },
   });

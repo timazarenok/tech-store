@@ -9,11 +9,15 @@ const Orders = (props) => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/orders")
-      .then((response) => setOrders(response.data))
-      .catch(err => console.log(err))
+    updateData();
   }, [orders.length]);
+
+  const updateData = () => {
+    axios
+    .get("http://localhost:3000/api/orders")
+    .then((response) => setOrders(response.data))
+    .catch(err => console.log(err))
+  }
 
   return (
     <>
@@ -21,7 +25,7 @@ const Orders = (props) => {
         <ul className="products">
           {orders.map((el) => (
             <li>
-              <OrderItem {...el} />
+              <OrderItem {...el} updateData={updateData} />
             </li>
           ))}
         </ul>

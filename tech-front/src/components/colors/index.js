@@ -5,7 +5,19 @@ import { Button } from "react-bootstrap";
 
 import "./colors.css";
 
-const Colors = ({colors, updateData}) => {
+const Colors = () => {
+  const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    updateData();
+  }, [colors.length]);
+
+  const updateData = () => {
+    axios
+      .get("http://localhost:3000/api/colors")
+      .then((response) => setColors(response.data))
+      .catch((err) => console.log(err));
+    };
   const [color, setColor] = useState("");
   
   const addNew = () => {

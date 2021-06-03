@@ -65,14 +65,14 @@ const Register = (props) => {
           <span className="text-danger font-weight-bold">{errors.name}</span>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Почта</Form.Label>
           <FormControl
             onChange={onChangeEmail}
             value={email}
             error={errors.email}
             id="email"
             type="email"
-            placeholder="Email"
+            placeholder="Почта"
           />
           <span className="text-danger font-weight-bold">{errors.email}</span>
         </Form.Group>
@@ -94,14 +94,14 @@ const Register = (props) => {
           </span>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Пароль</Form.Label>
+          <Form.Label>Подтверждение пароля</Form.Label>
           <FormControl
             onChange={onChangePassword2}
             value={password2}
             error={errors.password2}
             id="password2"
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Подтверждение пароля"
           />
           <span className="text-danger font-weight-bold">
             {errors.password2}

@@ -8,6 +8,7 @@ const Product = (props) => {
   const [data, setData] = useState({});
   const [color, setColor] = useState("");
   const [manufacturer, setManufacturer] = useState("");
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     axios
@@ -17,14 +18,21 @@ const Product = (props) => {
         axios
           .get("http://localhost:3000/api/colors/" + response.data.colorId)
           .then((response) => setColor(response.data.name))
-          .catch(err => console.log(err))
+          .catch(err => setColor(""))
         axios
           .get(
             "http://localhost:3000/api/manufacturers/" +
               response.data.manufacturerId
           )
           .then((response) => setManufacturer(response.data.name))
-          .catch(err => console.log(err))
+          .catch(err => setManufacturer(""))
+        axios
+          .get(
+            "http://localhost:3000/api/categories/" +
+              response.data.categoryId
+          )
+          .then((response) => setCategory(response.data.name))
+          .catch(err => setCategory(""))
       })
       .catch((err) => console.log(err));
   }, [data != {}]);
@@ -44,6 +52,9 @@ const Product = (props) => {
             <ListGroup variant="flush">
               <ListGroup.Item>Цвет: {color}</ListGroup.Item>
               <ListGroup.Item>Производитель: {manufacturer}</ListGroup.Item>
+              <ListGroup.Item>Категория: {category}</ListGroup.Item>
+              <ListGroup.Item>Ширина: {data.width}</ListGroup.Item>
+              <ListGroup.Item>Высота: {data.height}</ListGroup.Item>
             </ListGroup>
             <Card.Text className="price">{data.price} BYN</Card.Text>
           </Card.Body>

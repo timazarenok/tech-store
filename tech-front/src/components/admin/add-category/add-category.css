@@ -1,0 +1,39 @@
+.form-add {
+    margin-left: 150px;
+  }
+  
+  .form-control {
+    width: 300px;
+  }
+  
+  .form-group {
+    margin-right: 20px;
+  }
+  
+  .submit-button {
+    margin-top: 20px;
+    border: none !important;
+    background-color: #fec5bb !important;
+    width: auto !important;
+    height: 35px;
+    margin-left: 20px;
+    color: black !important;
+    font-weight: bold;
+  }
+  
+  .submit-button:hover {
+    background-color: #0e6ba8  !important;
+    color: black !important;
+  }
+  
+  .header {
+    margin: auto;
+    color: #44a1a0;
+    margin-bottom: 20px;
+  }
+  
+  .colors-table {
+    width: 60% !important;
+    margin: auto !important;
+    margin-top: 50px !important;
+  }

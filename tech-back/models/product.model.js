@@ -16,4 +16,10 @@ module.exports = (Sequelize, sequelize) =>
       type: Sequelize.INTEGER,
       // required: true
     },
+    width: {
+      type: Sequelize.INTEGER,
+    },
+    height: {
+      type: Sequelize.INTEGER,
+    }
   })

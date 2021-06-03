@@ -14,8 +14,11 @@ router.post("/add", (req, res) => {
     description: req.body.description,
     imageUrl: req.body.imageUrl,
     price: req.body.price,
+    width: req.body.width,
+    height: req.body.height,
     colorId: req.body.colorId,
     manufacturerId: req.body.manufacturerId,
+    categoryId: req.body.categoryId,
   })
     .then((product) => res.json({ msg: "Product added successfully" }))
     .catch((err) => {
@@ -33,7 +36,7 @@ router.get("/", (req, res) => {
       {
         model: Order,
         as: "orders",
-        attributes: ["id", "telephone", "address"],
+        attributes: ["id", "telephone", "address", "status", "deliveryId"],
         through: {
           attributes: ["order_id", "product_id"],
         },

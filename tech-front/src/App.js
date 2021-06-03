@@ -20,6 +20,12 @@ import Admin from './components/admin'
 import Cart from './components/cart'
 import Product from './components/product'
 import Catalog from "./components/catalog";
+import CatalogLink from "./components/catalog/catalog-link";
+import AddProduct from "./components/admin/add-product";
+import Colors from "./components/colors";
+import Manufacturers from "./components/manufacturer";
+import AddCategory from "./components/admin/add-category";
+import AddDelivery from "./components/admin/add-delivery";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -43,15 +49,21 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Header/>
+        <Header />
         <Route exact path='/register' component={Register} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/' component={Main} />
         <Route exact path='/catalog' component={Catalog} />
+        <Route exact path='/catalog/:id' component={CatalogLink} />
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/product/:id' component={Product} />
         <Switch>
           <AdminRoute exact path="/admin" component={Admin} />
+          <AdminRoute exact path="/admin/add-product" component={AddProduct} />
+          <AdminRoute exact path="/admin/add-color" component={Colors} />
+          <AdminRoute exact path="/admin/add-manufacturer" component={Manufacturers} />
+          <AdminRoute exact path="/admin/add-category" component={AddCategory} />
+          <AdminRoute exact path="/admin/add-delivery" component={AddDelivery} />
         </Switch>
       </Router>
     </Provider>

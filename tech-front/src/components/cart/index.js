@@ -11,15 +11,30 @@ const Cart = (props) => {
   const { cart_items, totalCount, totalPrice } = useSelector(
     (state) => state.cart
   );
+
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
   const [telephone, setTelephone] = useState("");
+  const [deliveryId, setId] = useState(null);
+  const [deliveries, setDeliveries] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/deliveries/")
+    .then(resposne => {
+      setDeliveries(resposne.data);
+      setId(resposne.data[0].id);
+    })
+    .catch(err => console.log(err))
+  }, [deliveries.length])
 
   const onClickOrder = () => {
     let order = {
       telephone: telephone,
       address: address,
+      status: false,
+      deliveryId: deliveryId
     };
+
     axios
       .post("http://localhost:3000/api/add", order)
       .then((res) => {
@@ -51,6 +66,11 @@ const Cart = (props) => {
 
   const onChangeAddress = (e) => {
     setAddress(e.target.value);
+  };
+
+  const onChangeId = (e) => {
+    console.log(e.target.value);
+    setId(e.target.value);
   };
 
   const onChangeTelephone = (e) => {
@@ -116,6 +136,19 @@ const Cart = (props) => {
                 onChange={onChangeAddress}
               />
             </Form.Group>
+            <Form.Label>Способ доставки</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={deliveryId}
+                  onChange={onChangeId}
+                  name="deliveryrId"
+                  id="delivery"
+                  required
+                >
+                  {deliveries.map((el) => (
+                    <option value={el.id}>{el.name}</option>
+                  ))}
+                </Form.Control>
             <Button onClick={onClickOrder}>Оформить заказ</Button>
           </Form>
         </>

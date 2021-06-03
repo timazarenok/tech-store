@@ -5,7 +5,19 @@ import { Button } from "react-bootstrap";
 
 import "./manufacturers.css";
 
-const Manufacturers = ({manufacturers, updateData}) => {
+const Manufacturers = () => {
+  const [manufacturers, setManufacturers] = useState([]);
+
+  useEffect(() => {
+    updateData();
+  }, [manufacturers.length]);
+
+  const updateData = () => {
+    axios
+      .get("http://localhost:3000/api/manufacturers")
+      .then((response) => setManufacturers(response.data))
+      .catch((err) => console.log(err));
+    };
   const [manufacturer, setManufacturer] = useState("");
 
   const addNew = () => {

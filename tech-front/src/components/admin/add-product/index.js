@@ -1,17 +1,43 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FormControl, Button, Form, Row } from "react-bootstrap";
 
 import "./add-product.css";
 
-const AddProduct = ({ colors, manufacturers }) => {
+const AddProduct = () => {
+  const [colors, setColors] = useState([]);
+  const [manufacturers, setManufacturers] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    updateData();
+  }, [colors.length, manufacturers.length, categories.length]);
+
+  const updateData = () => {
+    axios
+      .get("http://localhost:3000/api/colors")
+      .then((response) => setColors(response.data))
+      .catch((err) => console.log(err));
+    axios
+      .get("http://localhost:3000/api/manufacturers")
+      .then((response) => setManufacturers(response.data))
+      .catch((err) => console.log(err));
+    axios
+      .get("http://localhost:3000/api/categories")
+      .then((response) => setCategories(response.data))
+      .catch((err) => console.log(err));
+    };
+
   const [product, setProduct] = useState({
     name: "",
     imageUrl: "",
     description: "",
     price: 0,
-    colorId: colors[0],
-    manufacturerId: manufacturers[0],
+    width: 0,
+    height: 0,
+    colorId: colors[0] === undefined ? 1 : colors[0].id,
+    manufacturerId: manufacturers[0] === undefined ? 1 : manufacturers[0].id,
+    categoryId: categories[0] === undefined ? 1 : categories[0].id,
   });
 
   const onAddClick = (e) => {
@@ -24,8 +50,11 @@ const AddProduct = ({ colors, manufacturers }) => {
           description: "",
           imageUrl: "",
           price: 0,
+          width: 0,
+          height: 0,
           colorId: "",
           manufacturerId: "",
+          categoryId: ""
         });
       })
       .catch((err) => {
@@ -134,6 +163,52 @@ const AddProduct = ({ colors, manufacturers }) => {
                     <option value={el.id}>{el.name}</option>
                   ))}
                 </FormControl>
+              </Form.Group>
+            </Row>
+            <Row>
+              <Form.Group>
+                <Form.Label>Категория товара</Form.Label>
+                <FormControl
+                  as="select"
+                  value={product.categoryId}
+                  onChange={onChange}
+                  className="form-select"
+                  name="categoryId"
+                  id="category"
+                  required
+                >
+                  {categories.map((el) => (
+                    <option value={el.id}>{el.name}</option>
+                  ))}
+                </FormControl>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Ширина</Form.Label>
+                <FormControl
+                  type="number"
+                  value={product.width}
+                  onChange={onChange}
+                  className="number"
+                  name="width"
+                  id="width"
+                  placeholder="ширина"
+                  min="1"
+                  required
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Высота</Form.Label>
+                <FormControl
+                  type="number"
+                  value={product.height}
+                  onChange={onChange}
+                  className="number"
+                  name="height"
+                  id="height"
+                  placeholder="высота"
+                  min="1"
+                  required
+                />
               </Form.Group>
             </Row>
             <div className="input-w3ls">

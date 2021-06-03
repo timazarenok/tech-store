@@ -12,7 +12,9 @@ router.post("/add", (req, res) => {
   Order.create({
     telephone: req.body.telephone,
     address: req.body.address,
+    status: req.body.status,
     product: req.body.product,
+    deliveryId: req.body.deliveryId
   })
     .then((order) => res.json(order))
     .catch((err) =>
@@ -35,7 +37,7 @@ router.post("/orders/:id/add-product/:product_id", (req,res) => {
 
         order.addProduct(product);
         res.json({msg: `added Product id=${product.id} to Order id=${order.id}`});
-        return tag;
+        return null;
       });
     })
     .catch((err) => {
@@ -56,8 +58,11 @@ router.get("/orders", (req, res) => {
           "name",
           "description",
           "price",
+          "width",
+          "height",
           "manufacturerId",
           "colorId",
+          "categoryId"
         ],
         through: {
           attributes: ["order_id", "product_id"],
@@ -87,12 +92,36 @@ router.delete("/order/:id", (req, res) => {
 // @route PUT api/order/:id
 // @description Update order
 // @access Public
-router.put("/order/:id", (req, res) => {
-  Order.findByIdAndUpdate(req.params.id, req.body)
-    .then((order) => res.json({ msg: "Updated successfully" }))
-    .catch((err) =>
-      res.status(400).json({ error: "Unable to update the Database" })
-    );
+
+router.put("/update/:id", (req, res) => {
+  Order.findByPk(req.params.id, {
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: [
+          "id",
+          "name",
+          "description",
+          "price",
+          "manufacturerId",
+          "colorId",
+        ],
+        through: {
+          attributes: ["order_id", "product_id"],
+        },
+      },
+    ],
+  })
+  .then((order) => {
+    if (order) {
+      order.update({
+        ...order,
+        status: req.body.status
+      })
+      .then(() => res.json({ msg: "Updated successfully" }))
+    }
+  })
 });
 
 // @route GET api/order/:id

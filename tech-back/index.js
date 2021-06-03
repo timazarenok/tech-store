@@ -7,7 +7,9 @@ const users = require("./routes/api/users");
 const orders = require("./routes/api/orders");
 const products = require("./routes/api/products");
 const colors = require("./routes/api/colors");
+const categories = require("./routes/api/categories");
 const manufacturers = require("./routes/api/manufacturers");
+const deliveries = require("./routes/api/deliveries");
 
 var { sequelize } = require("./models/index");
 const app = express();
@@ -24,8 +26,8 @@ app.use(bodyParser.json());
 // Connect to MongoDB
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'newuser',
-  password: '0',
+  user: 'root',
+  password: 'tima2002',
   database: 'tech'
 });
 
@@ -39,8 +41,9 @@ app.use("/api/users", users);
 app.use("/api", orders);
 app.use("/api/products", products)
 app.use("/api/colors", colors)
+app.use("/api/categories", categories)
 app.use("/api/manufacturers", manufacturers)
-
+app.use("/api/deliveries", deliveries)
 
 const port = process.env.PORT || 3000;
 

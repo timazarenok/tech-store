@@ -43,10 +43,10 @@ const Login = (props) => {
   return (
     <Form className="login-from" onSubmit={onSubmitForm}>
       <h1>Вход</h1>
-      <Form.Label>Логин</Form.Label>
+      <Form.Label>Почта</Form.Label>
       <InputGroup>
         <FormControl
-          placehoder="Логин"
+          placehoder="Почта"
           value={login}
           onChange={onChangeLogin}
         />

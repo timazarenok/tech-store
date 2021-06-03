@@ -22,7 +22,7 @@ const Header = (props) => {
         <div className="top-nav">
           <nav className="navbar navbar-expand-lg">
             <Link className="navbar-brand text-uppercase" to="/">
-              Техник-мастер <Shop />
+              Техно Торг Онлайн <Shop />
             </Link>
             <button
               className="navbar-toggler"
@@ -81,6 +81,61 @@ const Header = (props) => {
                     className="nav-link"
                   >
                     Админ
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/admin/add-product"
+                    style={{
+                      display: user.email === "admin@gmail.com" ? "block" : "none",
+                    }}
+                    className="nav-link"
+                  >
+                    Товары
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/admin/add-color"
+                    style={{
+                      display: user.email === "admin@gmail.com" ? "block" : "none",
+                    }}
+                    className="nav-link"
+                  >
+                    Цвета
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/admin/add-manufacturer"
+                    style={{
+                      display: user.email === "admin@gmail.com" ? "block" : "none",
+                    }}
+                    className="nav-link"
+                  >
+                    Производители
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/admin/add-category"
+                    style={{
+                      display: user.email === "admin@gmail.com" ? "block" : "none",
+                    }}
+                    className="nav-link"
+                  >
+                    Категории
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/admin/add-delivery"
+                    style={{
+                      display: user.email === "admin@gmail.com" ? "block" : "none",
+                    }}
+                    className="nav-link"
+                  >
+                    Доставка
                   </Link>
                 </li>
                 <li className="nav-item">
