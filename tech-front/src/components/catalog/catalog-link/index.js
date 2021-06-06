@@ -20,7 +20,7 @@ const CatalogLink = (props) => {
     axios
       .get("http://localhost:3000/api/products")
       .then((response) => setProducts(response.data));
-    axios.get("http://localhost:3000/api/categories/"+props.match.params.id)
+    axios.get("http://localhost:3000/api/subcategories/"+props.match.params.id)
     .then(response => setCategory(response.data))
     .catch(err => console.log(err))
   }, [products.length, color.length, manufacturer.length]);
@@ -38,7 +38,7 @@ const CatalogLink = (props) => {
       />
       <ul className="products">
         {products
-          .filter(el => el.categoryId.toString().includes(category.id))
+          .filter(el => el.subcategoryId.toString() == category.id)
           .filter(el => el.name.includes(name))
           .filter(
             (el) =>

@@ -1,4 +1,5 @@
-import { ADD_TO_CART, DELETE_FROM_CART, MINUS_ITEM, PLUS_ITEM } from "../constants";
+import { ADD_TO_CART, DELETE_FROM_CART, MINUS_ITEM, PLUS_ITEM, CLEAR_CART } from "../constants";
+import { NotificationManager } from 'react-notifications';
 
 const addToCart = (data) => ({
   type: ADD_TO_CART,
@@ -6,6 +7,7 @@ const addToCart = (data) => ({
 })
 
 export const Add = (data) => dispatch => {
+  NotificationManager.success('Продукт добавлен в корзину', 'Успех')
   dispatch(addToCart(data))
 }
 
@@ -13,6 +15,14 @@ const removeFromCart = (data) => ({
   type: DELETE_FROM_CART,
   data: data
 })
+
+const clearCart = () => ({
+  type: CLEAR_CART
+})
+
+export const clear = () => dispatch => {
+  dispatch(clearCart())
+}
 
 export const Delete = (data) => dispatch => {
   dispatch(removeFromCart(data))

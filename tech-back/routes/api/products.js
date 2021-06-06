@@ -18,7 +18,7 @@ router.post("/add", (req, res) => {
     height: req.body.height,
     colorId: req.body.colorId,
     manufacturerId: req.body.manufacturerId,
-    categoryId: req.body.categoryId,
+    subcategoryId: req.body.subcategoryId,
   })
     .then((product) => res.json({ msg: "Product added successfully" }))
     .catch((err) => {
@@ -38,7 +38,7 @@ router.get("/", (req, res) => {
         as: "orders",
         attributes: ["id", "telephone", "address", "status", "deliveryId"],
         through: {
-          attributes: ["order_id", "product_id"],
+          attributes: ["order_id", "product_id", "count"],
         },
       },
     ],

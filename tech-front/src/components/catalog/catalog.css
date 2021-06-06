@@ -1,4 +1,27 @@
 .catalog-link {
+    margin: 15px;
+    font-size: 20px;
+}
+
+.categories-list {
+    margin-top: 50px !important;
+    list-style: none;
+    width: 60%;
+    margin: auto;
+}
+
+.categories-list li {
     margin: 10px;
-    font-size: 28px;
+    margin-top: 15px;
+    display: inline-block;
+    width: 500px;
+}
+
+.categories-list h1 {
+    color: #44a1a0;
+}
+
+.subcategories-list {
+    list-style: none;
+    padding: 0;
 }

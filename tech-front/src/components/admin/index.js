@@ -42,7 +42,7 @@ const Admin = () => {
 
   return (
     <>
-      <h1 className="header-admin">Админская панель</h1>
+      <h1 className="header-admin">Панель Администратора</h1>
       <Orders />
     </>
   );

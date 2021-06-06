@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form, Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { NotificationManager } from 'react-notifications';
 
 import "./add-delivery.css";
 
@@ -24,10 +25,11 @@ const AddDelivery = () => {
     axios
       .post("http://localhost:3000/api/deliveries/add", { name: delivery })
       .then((response) => {
+        NotificationManager.success('Способ доставки был успешно добавлен', "Успех")
         updateData();
         setDelivery("");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => NotificationManager.error('Проверьте вводимые данные', "Ошибка"));
   };
 
   const onChangeDelivery = (e) => {

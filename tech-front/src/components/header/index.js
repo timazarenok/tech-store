@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { connect, useSelector} from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/actions/authActions";
 import { Shop } from "react-bootstrap-icons";
 
@@ -48,6 +48,17 @@ const Header = (props) => {
                 <li className="nav-item">
                   <Link to="/catalog" className="nav-link">
                     Каталог
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/profile"
+                    style={{
+                      display: user.id !== undefined ? "block" : "none",
+                    }}
+                    className="nav-link"
+                  >
+                    Профиль
                   </Link>
                 </li>
                 <li className="nav-item">

@@ -8,6 +8,11 @@
 
 .form-group {
   margin-right: 20px;
+  width: 300px !important;
+}
+
+.col {
+  width: 300px !important;
 }
 
 .submit-button {

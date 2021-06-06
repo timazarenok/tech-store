@@ -16,9 +16,24 @@ const OrderItem = ({ id, telephone, address, status, deliveryId, products, updat
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/deliveries/"+deliveryId)
-      .then((response) => setDelivery(response.data))
+      .then((response) => {
+        if(response.data) {
+          setDelivery(response.data)
+        }
+        else {
+          setDelivery({name: ""})
+        }
+      })
       .catch(err => console.log(err))
   }, [delivery.name.length != 0]);
+
+  const totalPrice = (arr) => {
+    return arr.reduce((sum, el) => sum + el.price * el.orderProduct.count, 0)
+  }
+
+  const totalCount = (arr) => {
+    return arr.reduce((sum, el) => sum + el.orderProduct.count, 0)
+  }
 
   return (
     <Card className="order-card">
@@ -32,10 +47,12 @@ const OrderItem = ({ id, telephone, address, status, deliveryId, products, updat
         <ListGroup variant="flush">
           {
             products.map(el => (
-              <ListGroup.Item>{el.name}</ListGroup.Item>
+              <ListGroup.Item>{el.name} {el.orderProduct.count}шт. {el.price * el.orderProduct.count} BYN</ListGroup.Item>
             ))
           }
         </ListGroup>
+        <Card.Text>Кол-во: {totalCount(products)} шт.</Card.Text>
+        <Card.Text>Сумма: {totalPrice(products)} BYN</Card.Text>
         <Button type="submit" onClick={setStatus} className="submit-button">
           {
             status ? "Обработан" : "Не обработан"

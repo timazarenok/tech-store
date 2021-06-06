@@ -4,13 +4,16 @@ import { Form, Button } from "react-bootstrap";
 import { connect, useDispatch, useSelector } from "react-redux";
 import CartItem from "./cart-item";
 import InputMask from "react-input-mask";
-import { Delete, Minus, Plus } from "../../redux/actions/cartActions";
+import { Delete, Minus, Plus, clear } from "../../redux/actions/cartActions";
+import { NotificationManager } from 'react-notifications';
+
 import "./cart.css";
 
 const Cart = (props) => {
   const { cart_items, totalCount, totalPrice } = useSelector(
     (state) => state.cart
   );
+  const {user} = useSelector(state => state.auth)
 
   const dispatch = useDispatch();
   const [address, setAddress] = useState("");
@@ -32,22 +35,29 @@ const Cart = (props) => {
       telephone: telephone,
       address: address,
       status: false,
-      deliveryId: deliveryId
+      deliveryId: deliveryId,
+      userId: user.id
     };
-
+    if(address.length === 0 || telephone.length === 0){
+      NotificationManager.error('Проверьте данные еще раз', 'Заказ отклонен')
+      return;
+    }
     axios
       .post("http://localhost:3000/api/add", order)
       .then((res) => {
         setAddress("");
         setTelephone("");
         cart_items.map(el => {
-          axios.post(`http://localhost:3000/api/orders/${res.data.id}/add-product/${el.id}`)
+          axios.post(`http://localhost:3000/api/orders/${res.data.id}/add-product/${el.id}`, {count: el.count})
           .then(res => console.log(res.data))
           .catch(err => console.log(err))
         })
+        NotificationManager.success('Заказ принят', 'Успех')
+        dispatch(clear());
         props.history.push("/");
       })
       .catch((err) => {
+        NotificationManager.error('Проверьте данные еще раз', 'Заказ отклонен')
         console.log(err);
       });
   };

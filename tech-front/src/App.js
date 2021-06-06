@@ -9,8 +9,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import 'react-notifications/lib/notifications.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { NotificationContainer } from 'react-notifications';
 import Login from "./components/auth/login";
 import Header from './components/header'
 import Main from './components/main'
@@ -26,6 +28,7 @@ import Colors from "./components/colors";
 import Manufacturers from "./components/manufacturer";
 import AddCategory from "./components/admin/add-category";
 import AddDelivery from "./components/admin/add-delivery";
+import Profile from "./components/profile";
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -55,6 +58,7 @@ const App = () => {
         <Route exact path='/' component={Main} />
         <Route exact path='/catalog' component={Catalog} />
         <Route exact path='/catalog/:id' component={CatalogLink} />
+        <Route exact path='/profile' component={Profile} />
         <Route exact path='/cart' component={Cart} />
         <Route exact path='/product/:id' component={Product} />
         <Switch>
@@ -65,6 +69,7 @@ const App = () => {
           <AdminRoute exact path="/admin/add-category" component={AddCategory} />
           <AdminRoute exact path="/admin/add-delivery" component={AddDelivery} />
         </Switch>
+        <NotificationContainer />
       </Router>
     </Provider>
   );

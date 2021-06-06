@@ -1,32 +1,38 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FormControl, Button, Form, Row } from "react-bootstrap";
+import { FormControl, Button, Form, Row, Table } from "react-bootstrap";
+import { NotificationManager } from 'react-notifications';
 
 import "./add-product.css";
 
 const AddProduct = () => {
   const [colors, setColors] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [subcategories, setCategories] = useState([]);
 
   useEffect(() => {
     updateData();
-  }, [colors.length, manufacturers.length, categories.length]);
+  }, [colors.length, manufacturers.length, subcategories.length]);
+
+  const addEmpty = (arr) => {
+    arr.unshift({ id: 0, name: "" })
+    return arr;
+  }
 
   const updateData = () => {
     axios
       .get("http://localhost:3000/api/colors")
-      .then((response) => setColors(response.data))
+      .then((response) => setColors(addEmpty(response.data)))
       .catch((err) => console.log(err));
     axios
       .get("http://localhost:3000/api/manufacturers")
-      .then((response) => setManufacturers(response.data))
+      .then((response) => setManufacturers(addEmpty(response.data)))
       .catch((err) => console.log(err));
     axios
-      .get("http://localhost:3000/api/categories")
-      .then((response) => setCategories(response.data))
+      .get("http://localhost:3000/api/subcategories")
+      .then((response) => setCategories(addEmpty(response.data)))
       .catch((err) => console.log(err));
-    };
+  };
 
   const [product, setProduct] = useState({
     name: "",
@@ -37,7 +43,7 @@ const AddProduct = () => {
     height: 0,
     colorId: colors[0] === undefined ? 1 : colors[0].id,
     manufacturerId: manufacturers[0] === undefined ? 1 : manufacturers[0].id,
-    categoryId: categories[0] === undefined ? 1 : categories[0].id,
+    subcategoryId: subcategories[0] === undefined ? 1 : subcategories[0].id,
   });
 
   const onAddClick = (e) => {
@@ -45,6 +51,7 @@ const AddProduct = () => {
     axios
       .post("http://localhost:3000/api/products/add", product)
       .then((res) => {
+        NotificationManager.success('Продукт был успешно добавлен', "Успех")
         setProduct({
           name: "",
           description: "",
@@ -54,17 +61,42 @@ const AddProduct = () => {
           height: 0,
           colorId: "",
           manufacturerId: "",
-          categoryId: ""
+          subcategoryId: ""
         });
       })
       .catch((err) => {
-        console.log(err);
+        NotificationManager.error('Проверьте вводимые данные', "Ошибка")
       });
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    switch (name) {
+      case "price": {
+        if (value < 0) {
+          return;
+        } else {
+          setProduct({ ...product, [name]: value });
+        }
+      }
+      case "height": {
+        if (value < 0) {
+          return;
+        } else {
+          setProduct({ ...product, [name]: value });
+        }
+      }
+      case "width": {
+        if (value < 0) {
+          return;
+        } else {
+          setProduct({ ...product, [name]: value });
+        }
+      }
+      default: {
+        setProduct({ ...product, [name]: value });
+      }
+    }
   };
 
   return (
@@ -121,7 +153,7 @@ const AddProduct = () => {
             </Row>
             <Row>
               <Form.Group>
-                <Form.Label>Цена</Form.Label>
+                <Form.Label>Цена (BYN)</Form.Label>
                 <FormControl
                   type="number"
                   value={product.price}
@@ -170,20 +202,20 @@ const AddProduct = () => {
                 <Form.Label>Категория товара</Form.Label>
                 <FormControl
                   as="select"
-                  value={product.categoryId}
+                  value={product.subcategoryId}
                   onChange={onChange}
                   className="form-select"
-                  name="categoryId"
+                  name="subcategoryId"
                   id="category"
                   required
                 >
-                  {categories.map((el) => (
+                  {subcategories.map((el) => (
                     <option value={el.id}>{el.name}</option>
                   ))}
                 </FormControl>
               </Form.Group>
               <Form.Group>
-                <Form.Label>Ширина</Form.Label>
+                <Form.Label>Ширина (см.)</Form.Label>
                 <FormControl
                   type="number"
                   value={product.width}
@@ -197,7 +229,7 @@ const AddProduct = () => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Высота</Form.Label>
+                <Form.Label>Высота (см.)</Form.Label>
                 <FormControl
                   type="number"
                   value={product.height}

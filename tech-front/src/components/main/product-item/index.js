@@ -3,12 +3,12 @@ import { Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "./product-item.css";
 
-const ProductItem = ({ id, name, image, description, price, AddToCart }) => {
+const ProductItem = ({ id, name, imageUrl, description, price, AddToCart }) => {
   let history = useHistory();
   return (
     <Card>
       <Card.Title className="card-title">{name}</Card.Title>
-      <Card.Img className="card-image" src={image} />
+      <Card.Img className="card-image" src={`${imageUrl}?auto=compress&cs=tinysrgb&h=350`} />
       <Card.Text className="description">{description}</Card.Text>
       <div>
         <Card.Text className="price">

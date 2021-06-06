@@ -14,7 +14,8 @@ router.post("/add", (req, res) => {
     address: req.body.address,
     status: req.body.status,
     product: req.body.product,
-    deliveryId: req.body.deliveryId
+    deliveryId: req.body.deliveryId,
+    userId: req.body.userId
   })
     .then((order) => res.json(order))
     .catch((err) =>
@@ -22,7 +23,7 @@ router.post("/add", (req, res) => {
     );
 });
 
-router.post("/orders/:id/add-product/:product_id", (req,res) => {
+router.post("/orders/:id/add-product/:product_id", (req, res) => {
   return Order.findByPk(req.params.id)
     .then((order) => {
       if (!order) {
@@ -35,8 +36,8 @@ router.post("/orders/:id/add-product/:product_id", (req,res) => {
           return null;
         }
 
-        order.addProduct(product);
-        res.json({msg: `added Product id=${product.id} to Order id=${order.id}`});
+        order.addProduct(product, { through: { count: req.body.count } });
+        res.json({ msg: `added Product id=${product.id} to Order id=${order.id}` });
         return null;
       });
     })
@@ -62,10 +63,10 @@ router.get("/orders", (req, res) => {
           "height",
           "manufacturerId",
           "colorId",
-          "categoryId"
+          "subcategoryId"
         ],
         through: {
-          attributes: ["order_id", "product_id"],
+          attributes: ["order_id", "product_id", "count"],
         },
       },
     ],
@@ -75,6 +76,37 @@ router.get("/orders", (req, res) => {
       res.status(404).json({ noinquiriesfound: "No orders found" })
     );
 });
+
+router.get("/orders/user/:id", (req, res) => {
+  Order.findAll({
+    where: { userId: req.params.id },
+    include: [
+      {
+        model: Product,
+        as: "products",
+        attributes: [
+          "id",
+          "name",
+          "description",
+          "price",
+          "width",
+          "height",
+          "manufacturerId",
+          "colorId",
+          "subcategoryId"
+        ],
+        through: {
+          attributes: ["order_id", "product_id", "count"],
+        },
+      },
+    ],
+  })
+    .then((orders) => res.json(orders))
+    .catch((err) =>
+      res.status(404).json({ noinquiriesfound: "No orders found" })
+    );
+});
+
 
 // @route DELETE api/order/:id
 // @description Delete order by id
@@ -104,8 +136,11 @@ router.put("/update/:id", (req, res) => {
           "name",
           "description",
           "price",
+          "width",
+          "height",
           "manufacturerId",
           "colorId",
+          "subcategoryId"
         ],
         through: {
           attributes: ["order_id", "product_id"],
@@ -113,15 +148,15 @@ router.put("/update/:id", (req, res) => {
       },
     ],
   })
-  .then((order) => {
-    if (order) {
-      order.update({
-        ...order,
-        status: req.body.status
-      })
-      .then(() => res.json({ msg: "Updated successfully" }))
-    }
-  })
+    .then((order) => {
+      if (order) {
+        order.update({
+          ...order,
+          status: req.body.status
+        })
+          .then(() => res.json({ msg: "Updated successfully" }))
+      }
+    })
 });
 
 // @route GET api/order/:id
@@ -138,8 +173,11 @@ router.get("/order/:id", (req, res) => {
           "name",
           "description",
           "price",
+          "width",
+          "height",
           "manufacturerId",
           "colorId",
+          "subcategoryId"
         ],
         through: {
           attributes: ["order_id", "product_id"],

@@ -35,6 +35,14 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.get("/", (req,res) => {
+  User.findAll()
+    .then((users) => res.json(users))
+    .catch((err) =>
+      res.status(404).json({ noinquiriesfound: "No User found" })
+    );
+})
+
 // @route POST api/users/login
 // @desc Login user and return JWT token
 // @access Public

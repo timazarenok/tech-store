@@ -10,6 +10,7 @@ const colors = require("./routes/api/colors");
 const categories = require("./routes/api/categories");
 const manufacturers = require("./routes/api/manufacturers");
 const deliveries = require("./routes/api/deliveries");
+const subcategories = require("./routes/api/subcategories");
 
 var { sequelize } = require("./models/index");
 const app = express();
@@ -42,6 +43,7 @@ app.use("/api", orders);
 app.use("/api/products", products)
 app.use("/api/colors", colors)
 app.use("/api/categories", categories)
+app.use("/api/subcategories", subcategories)
 app.use("/api/manufacturers", manufacturers)
 app.use("/api/deliveries", deliveries)
 

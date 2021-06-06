@@ -8,7 +8,7 @@ const CartItem = ({ id, count, onPlus, onMinus, onRemove }) => {
   const [data, setData] = useState({
     id: id,
     name: "",
-    imageURL: "",
+    imageUrl: "",
     price: null,
     count: null,
   });
@@ -34,7 +34,7 @@ const CartItem = ({ id, count, onPlus, onMinus, onRemove }) => {
   return (
     <div className="cart__item">
       <div className="cart__item-img">
-        <img className="pizza-block__image" src={data.imageURL} alt="product" />
+        <img className="pizza-block__image" src={`${data.imageUrl}?auto=compress&cs=tinysrgb&h=350`} alt="product" />
       </div>
       <div className="cart__item-info">
         <h3>{data.name}</h3>

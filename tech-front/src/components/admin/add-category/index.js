@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form, Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { NotificationManager } from 'react-notifications';
 
 import "./add-category.css";
 
@@ -15,19 +16,40 @@ const AddCategory = () => {
   const updateData = () => {
     axios
       .get("http://localhost:3000/api/categories")
-      .then((response) => setCategories(response.data))
+      .then((response) => setCategories(addEmpty(response.data)))
       .catch((err) => console.log(err));
-    };
+  };
   const [category, setCategory] = useState("");
-  
+  const [subCategory, setSubCategory] = useState({ name: "", categoryId: categories[0] === undefined ? 1 : categories[0].id })
+
   const addNew = () => {
     axios
       .post("http://localhost:3000/api/categories/add", { name: category })
       .then((response) => {
+        NotificationManager.success('Категория была успешно добавлена', "Успех")
         updateData();
         setCategory("");
       })
+      .catch((err) => NotificationManager.error('Проверьте вводимые данные', "Ошибка"));
+  };
+  
+  const addEmpty = (arr) => {
+    arr.unshift({id: 0, name: ""})
+    return arr;
+  }
+
+  const addNewSub = () => {
+    axios
+      .post("http://localhost:3000/api/subcategories/add", subCategory)
+      .then((response) => {
+        updateData();
+        setSubCategory({ name: "", categoryId: categories[0] === undefined ? 1 : categories[0].id });
+      })
       .catch((err) => console.log(err));
+  };
+
+  const onChangeSubCategory = (e) => {
+    setSubCategory({...subCategory, [e.target.name]: e.target.value });
   };
 
   const onChangeCategory = (e) => {
@@ -82,6 +104,36 @@ const AddCategory = () => {
         </tbody>
       </Table>
       <hr />
+      <Form className="form-add" onSubmit={addNewSub}>
+        <h1 className="header">Добавление подкатегорию товара</h1>
+        <Form.Group>
+          <Form.Label>Название</Form.Label>
+          <Form.Control
+            placheolder="Введите название подкатегории"
+            value={subCategory.name}
+            onChange={onChangeSubCategory}
+            name="name"
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            as="select"
+            value={subCategory.categoryId}
+            onChange={onChangeSubCategory}
+            className="form-select"
+            name="categoryId"
+            id="subcategory"
+            required
+          >
+            {categories.map((el) => (
+              <option value={el.id}>{el.name}</option>
+            ))}
+          </Form.Control>
+        </Form.Group>
+        <Button className="submit-button" onClick={addNewSub}>
+          Добавить
+        </Button>
+      </Form>
     </>
   );
 };

@@ -6,6 +6,9 @@ const { Manufacturer } = require("../../models");
 router.post("/add", (req, res) => {
   Manufacturer.create({
     name: req.body.name,
+    country: req.body.country,
+    importer: req.body.importer,
+    proizvod: req.body.proizvod,
   })
     .then((manufacturer) => res.json({ msg: "Manufacturer added successfully" }))
     .catch((err) => {

@@ -3,6 +3,7 @@ import {
   DELETE_FROM_CART,
   MINUS_ITEM,
   PLUS_ITEM,
+  CLEAR_CART
 } from "../constants";
 
 const initialState = {
@@ -13,6 +14,9 @@ const initialState = {
 
 const getTotalPrice = (arr) =>
   arr.reduce((sum, obj) => obj.price * obj.count + sum, 0);
+
+const getTotalCount = (arr) =>
+  arr.reduce((sum, obj) => obj.count + sum, 0);
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -25,23 +29,24 @@ export default (state = initialState, action) => {
       const newItem = !item
         ? { id: action.data.id, ...action.data, count: action.data.count }
         : {
-            ...state.cart_items[index],
-            count: state.cart_items[index].count + 1,
-          };
+          ...state.cart_items[index],
+          count: state.cart_items[index].count + 1,
+        };
 
       const newItems = !item
         ? [...state.cart_items, newItem]
         : state.cart_items.map((el) => {
-            return el.id === newItem.id ? { ...el, count: newItem.count } : el;
-          });
+          return el.id === newItem.id ? { ...el, count: newItem.count } : el;
+        });
 
       const totalPrice = getTotalPrice(newItems);
+      const totalCount = getTotalCount(newItems)
 
       return {
         ...state,
         cart_items: newItems,
         totalPrice: totalPrice,
-        totalCount: newItems.length,
+        totalCount: totalCount,
       };
     }
     case PLUS_ITEM: {
@@ -59,8 +64,9 @@ export default (state = initialState, action) => {
         return el.id === newItem.id ? { ...el, count: newItem.count } : el;
       });
       const totalPrice = getTotalPrice(newItems);
+      const totalCount = getTotalCount(newItems)
 
-      return { ...state, cart_items: newItems, totalPrice: totalPrice };
+      return { ...state, cart_items: newItems, totalPrice: totalPrice, totalCount: totalCount };
     }
     case MINUS_ITEM: {
       const index = state.cart_items.findIndex(
@@ -90,8 +96,9 @@ export default (state = initialState, action) => {
         });
 
         const totalPrice = getTotalPrice(newItems);
+        const totalCount = getTotalCount(newItems)
 
-        return { ...state, cart_items: newItems, totalPrice: totalPrice };
+        return { ...state, cart_items: newItems, totalPrice: totalPrice, totalCount: totalCount };
       }
     }
 
@@ -100,15 +107,24 @@ export default (state = initialState, action) => {
         (el) => el.id === action.data.id
       );
       const newItems = [...state.cart_items];
-      newItems.splice(index,1);
+      newItems.splice(index, 1);
       const totalPrice = getTotalPrice(newItems);
+      const totalCount = getTotalCount(newItems)
 
       return {
         ...state,
         cart_items: newItems,
         totalPrice: totalPrice,
-        totalCount: newItems.length
+        totalCount: totalCount
       };
+    }
+    case CLEAR_CART: {
+      return {
+        ...state,
+        cart_items: [],
+        totalPrice: 0,
+        totalCount: 0
+      }
     }
     default:
       return state;

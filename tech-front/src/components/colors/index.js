@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Form, Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { NotificationManager } from 'react-notifications';
 
 import "./colors.css";
 
@@ -17,17 +18,19 @@ const Colors = () => {
       .get("http://localhost:3000/api/colors")
       .then((response) => setColors(response.data))
       .catch((err) => console.log(err));
-    };
+  };
   const [color, setColor] = useState("");
-  
+
   const addNew = () => {
     axios
       .post("http://localhost:3000/api/colors/add", { name: color })
       .then((response) => {
+        NotificationManager.success('Цвет был успешно добавлен', "Успех")
         updateData();
         setColor("");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => NotificationManager.error('Проверьте вводимые данные', "Ошибка")
+      );
   };
 
   const onChangeColor = (e) => {
@@ -45,7 +48,7 @@ const Colors = () => {
     <>
       <hr />
       <Form className="form-add" onSubmit={addNew}>
-        <h1 className="header">Добавление цветов</h1>
+        <h1 className="header">Добавление цвет</h1>
         <Form.Group>
           <Form.Label>Название</Form.Label>
           <Form.Control

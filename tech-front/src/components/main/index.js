@@ -6,8 +6,7 @@ import { Add } from "../../redux/actions/cartActions";
 import InfoBlock from "../infoblock";
 import ProductItem from "./product-item";
 import "./main.css";
-
-import product1Image from "../../images/product1.png";
+import MyCarousel from '../my-carousel'
 import axios from "axios";
 
 const Main = (props) => {
@@ -18,17 +17,20 @@ const Main = (props) => {
   }, [products.length]);
 
   return (
-    <div className="main-block">
-      <h1>Техника</h1>
-      <ul className="products">
-        {products.map((el) => (
-          <li>
-            <ProductItem {...el} AddToCart={props.AddToCart} />
-          </li>
-        ))}
-      </ul>
-      <InfoBlock />
-    </div>
+    <>
+      <MyCarousel />
+      <div className="main-block">
+        <h1>Техника</h1>
+        <ul className="products">
+          {products.slice(0,10).map((el) => (
+            <li>
+              <ProductItem {...el} AddToCart={props.AddToCart} />
+            </li>
+          ))}
+        </ul>
+        <InfoBlock />
+      </div>
+    </>
   );
 };
 

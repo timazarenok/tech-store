@@ -16,7 +16,7 @@ const Register = (props) => {
 
   useEffect(() => {
     if (props.auth.isAuthenticated) {
-      props.history.push("/orders");
+      props.history.push("/");
     }
   }, [errors != {email: "", password: ""}]);
 
@@ -45,6 +45,7 @@ const Register = (props) => {
       password2: password2,
     };
     props.registerUser(newUser, props.history);
+    props.history.push("/");
     setErrors(props.errors);
   };
 
@@ -53,14 +54,14 @@ const Register = (props) => {
       <h1>Регистрация</h1>
       <Form.Row>
         <Form.Group>
-          <Form.Label>Логин</Form.Label>
+          <Form.Label>Имя</Form.Label>
           <FormControl
             onChange={onChangeLogin}
             value={login}
             error={errors.name}
             id="name"
             type="text"
-            placeholder="Логин"
+            placeholder="Имя"
           />
           <span className="text-danger font-weight-bold">{errors.name}</span>
         </Form.Group>
