@@ -28,16 +28,6 @@ const Profile = () => {
         return arr.reduce((sum, el) => sum + el.orderProduct.count, 0)
     }
 
-    const onDelete = (id) => {
-        axios.delete("http://localhost:3000/api/order/" + id)
-            .then(() => {
-                updateData();
-                NotificationManager.success('Успешно удален', 'Успех')
-            })
-            .catch(err => NotificationManager.error('Попробуйте позже', 'Ошибка')
-            )
-    }
-
     return (
         <>
             {
@@ -69,9 +59,6 @@ const Profile = () => {
                                                     el.status ? "Обработан" : "Не обработан"
                                                 }
                                             </Card.Text>
-                                            <Button type="submit" onClick={() => onDelete(el.id)} className="submit-button">
-                                                Отменить заказ
-                                            </Button>
                                         </Card.Body>
                                     </Card>
                                 ))

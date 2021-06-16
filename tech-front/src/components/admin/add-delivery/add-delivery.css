@@ -13,13 +13,13 @@
   .submit-button {
     margin-top: 20px;
     border: none !important;
-    background-color: #fec5bb !important;
-    width: auto !important;
+    background-color: #44a1a0 !important;
+    width: auto;
     height: 35px;
     margin-left: 20px;
     color: black !important;
-    font-weight: bold;
   }
+  
   
   .submit-button:hover {
     background-color: #0e6ba8  !important;

@@ -48,55 +48,35 @@ const AddProduct = () => {
 
   const onAddClick = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/api/products/add", product)
-      .then((res) => {
-        NotificationManager.success('Продукт был успешно добавлен', "Успех")
-        setProduct({
-          name: "",
-          description: "",
-          imageUrl: "",
-          price: 0,
-          width: 0,
-          height: 0,
-          colorId: "",
-          manufacturerId: "",
-          subcategoryId: ""
+    if(product.width < 0 || product.height < 0 || product.price < 0) {
+      NotificationManager.error('Отрицательные данные', 'Ошибка!');
+    }
+    else {
+      axios
+        .post("http://localhost:3000/api/products/add", product)
+        .then((res) => {
+          NotificationManager.success('Продукт был успешно добавлен', "Успех")
+          setProduct({
+            name: "",
+            description: "",
+            imageUrl: "",
+            price: 0,
+            width: 0,
+            height: 0,
+            colorId: "",
+            manufacturerId: "",
+            subcategoryId: ""
+          });
+        })
+        .catch((err) => {
+          NotificationManager.error('Проверьте вводимые данные', "Ошибка")
         });
-      })
-      .catch((err) => {
-        NotificationManager.error('Проверьте вводимые данные', "Ошибка")
-      });
+    }
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    switch (name) {
-      case "price": {
-        if (value < 0) {
-          return;
-        } else {
-          setProduct({ ...product, [name]: value });
-        }
-      }
-      case "height": {
-        if (value < 0) {
-          return;
-        } else {
-          setProduct({ ...product, [name]: value });
-        }
-      }
-      case "width": {
-        if (value < 0) {
-          return;
-        } else {
-          setProduct({ ...product, [name]: value });
-        }
-      }
-      default: {
-        setProduct({ ...product, [name]: value });
-      }
-    }
+    setProduct({ ...product, [name]: value });
   };
 
   return (

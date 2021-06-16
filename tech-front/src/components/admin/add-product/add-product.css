@@ -15,11 +15,10 @@
   margin-top: 20px;
   border: none !important;
   background-color: #44a1a0 !important;
-  width: auto !important;
+  width: auto;
+  margin-left: 20pxs;
   height: 35px;
-  margin-left: 20px;
   color: black !important;
-  font-weight: bold;
 }
 
 .submit-button:hover {

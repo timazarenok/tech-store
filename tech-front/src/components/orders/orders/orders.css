@@ -14,3 +14,13 @@
 .header-order {
   font-size: 28px;
 }
+
+.excel-button {
+  margin-left: 50px;
+  margin-bottom: 100px;
+  border: none !important;
+  background-color: #44a1a0 !important;
+  width: auto;
+  height: 35px;
+  color: black !important;
+}

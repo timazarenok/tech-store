@@ -32,7 +32,12 @@ const Manufacturers = () => {
       .then((response) => {
         NotificationManager.success('Производитель был успешно добавлен', "Успех")
         updateData();
-        setManufacturer("");
+        setManufacturer({
+          name: "",
+          country: "",
+          importer: "",
+          proizvod: "",
+        });
       })
       .catch((err) => NotificationManager.error('Проверьте вводимые данные', "Ошибка")
       );

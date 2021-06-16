@@ -14,3 +14,11 @@
 .telephone, .address{
   color: black;
 }
+
+.submit-button {
+  border: none !important;
+  background-color: #44a1a0 !important;
+  width: auto;
+  height: 35px;
+  color: black !important;
+}
