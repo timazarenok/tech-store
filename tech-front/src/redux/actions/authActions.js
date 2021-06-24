@@ -11,10 +11,11 @@ export const setAuthToken = token => {
     delete axios.defaults.headers.common["Authorization"];
   }
 };
+const url = "84.201.178.27:3000";
 
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post("http://localhost:3000/api/users/register", userData)
+    .post(`http://${url}/api/users/register`, userData)
     .then(res => history.push("/login")) // re-direct to login on successful register
     .catch(err => {
       dispatch({
@@ -27,7 +28,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
-    .post("http://localhost:3000/api/users/login", userData)
+    .post(`http://${url}/api/users/login`, userData)
     .then(res => {
       // Save to localStorage
       // Set token to localStorage
