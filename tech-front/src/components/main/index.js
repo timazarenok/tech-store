@@ -9,11 +9,13 @@ import "./main.css";
 import MyCarousel from '../my-carousel'
 import axios from "axios";
 
+const url = "84.201.178.27:3000";
+
 const Main = (props) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products').then(response => setProducts(response.data))
+    axios.get(`http://${url}/api/products`).then(response => setProducts(response.data))
   }, [products.length]);
 
   return (

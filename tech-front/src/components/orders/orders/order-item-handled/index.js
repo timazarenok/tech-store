@@ -3,11 +3,13 @@ import { Card, ListGroup, Button } from "react-bootstrap";
 import axios from 'axios'
 import "./order-item-handled.css";
 
+const url = "84.201.178.27:3000";
+
 const OrderItemHandled = ({ id, telephone, address, status, products, updateData }) => {
 
   const setStatus = () => {
     axios
-    .put("http://localhost:3000/api/update/"+id, {status: !status})
+    .put(`http://${url}/api/update/`+id, {status: !status})
     .then((response) => updateData())
     .catch(err => console.log(err))
   }

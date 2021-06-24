@@ -4,6 +4,8 @@ import { Form, FormControl, Row, Col } from "react-bootstrap";
 
 import "./filter-params.css";
 
+const url = "84.201.178.27:3000";
+
 const FilterParams = (props) => {
   const [colors, setColors] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
@@ -16,7 +18,7 @@ const FilterParams = (props) => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/colors")
+      .get(`http://${url}/api/colors`)
       .then((response) => {
         response.data.unshift({name: ""})
         setColors(response.data);
@@ -24,7 +26,7 @@ const FilterParams = (props) => {
       })
       .catch((err) => console.log(err));
     axios
-      .get("http://localhost:3000/api/manufacturers")
+      .get(`http://${url}/api/manufacturers`)
       .then((response) => {
         response.data.unshift({name: ""})
         setManufacturers(response.data);

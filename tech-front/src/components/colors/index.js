@@ -6,6 +6,8 @@ import { NotificationManager } from 'react-notifications';
 
 import "./colors.css";
 
+const url = "84.201.178.27:3000";
+
 const Colors = () => {
   const [colors, setColors] = useState([]);
 
@@ -15,7 +17,7 @@ const Colors = () => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/colors")
+      .get(`http://${url}/api/colors`)
       .then((response) => setColors(response.data))
       .catch((err) => console.log(err));
   };
@@ -23,7 +25,7 @@ const Colors = () => {
 
   const addNew = () => {
     axios
-      .post("http://localhost:3000/api/colors/add", { name: color })
+      .post(`http://${url}/api/colors/add`, { name: color })
       .then((response) => {
         NotificationManager.success('Цвет был успешно добавлен', "Успех")
         updateData();
@@ -39,7 +41,7 @@ const Colors = () => {
 
   const onDelete = (id) => {
     axios
-      .delete("http://localhost:3000/api/colors/" + id)
+      .delete(`http://${url}/api/colors/` + id)
       .then((reposnse) => updateData())
       .catch((err) => updateData());
   };

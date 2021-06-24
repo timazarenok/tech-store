@@ -6,6 +6,8 @@ import { NotificationManager } from 'react-notifications';
 
 import "./add-delivery.css";
 
+const url = "84.201.178.27:3000";
+
 const AddDelivery = () => {
   const [deliveries, setDeliveries] = useState([]);
 
@@ -15,7 +17,7 @@ const AddDelivery = () => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/deliveries")
+      .get(`http://${url}/api/deliveries`)
       .then((response) => setDeliveries(response.data))
       .catch((err) => console.log(err));
     };
@@ -23,7 +25,7 @@ const AddDelivery = () => {
   
   const addNew = () => {
     axios
-      .post("http://localhost:3000/api/deliveries/add", { name: delivery })
+      .post(`http://${url}/api/deliveries/add`, { name: delivery })
       .then((response) => {
         NotificationManager.success('Способ доставки был успешно добавлен', "Успех")
         updateData();
@@ -38,7 +40,7 @@ const AddDelivery = () => {
 
   const onDelete = (id) => {
     axios
-      .delete("http://localhost:3000/api/deliveries/" + id)
+      .delete(`http://${url}/api/deliveries/` + id)
       .then((reposnse) => updateData())
       .catch((err) => updateData());
   };

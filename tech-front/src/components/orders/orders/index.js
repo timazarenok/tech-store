@@ -12,6 +12,8 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
+const url = "84.201.178.27:3000";
+
 const Orders = (props) => {
   const [orders, setOrders] = useState([]);
 
@@ -21,7 +23,7 @@ const Orders = (props) => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/orders")
+      .get(`http://${url}/api/orders`)
       .then((response) => setOrders(response.data))
       .catch(err => console.log(err))
   }

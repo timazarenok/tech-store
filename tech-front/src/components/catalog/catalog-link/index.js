@@ -9,6 +9,8 @@ import FilterParams from "../filter-params";
 import "../../main/main.css";
 import axios from "axios";
 
+const url = "84.201.178.27:3000";
+
 const CatalogLink = (props) => {
   const [products, setProducts] = useState([]);
   const [color, setColor] = useState("");
@@ -18,9 +20,9 @@ const CatalogLink = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/products")
+      .get(`http://${url}/api/products`)
       .then((response) => setProducts(response.data));
-    axios.get("http://localhost:3000/api/subcategories/"+props.match.params.id)
+    axios.get(`http://${url}/api/subcategories/`+props.match.params.id)
     .then(response => setCategory(response.data))
     .catch(err => console.log(err))
   }, [products.length, color.length, manufacturer.length]);

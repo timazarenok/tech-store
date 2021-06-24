@@ -7,6 +7,8 @@ import RemoteImage from 'react-remote-image'
 
 import "./product.css";
 
+const url = "84.201.178.27:3000";
+
 const Product = (props) => {
   const [data, setData] = useState({});
   const [color, setColor] = useState("");
@@ -15,23 +17,23 @@ const Product = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/products/${props.match.params.id}`)
+      .get(`http://${url}/api/products/${props.match.params.id}`)
       .then((response) => {
         setData(response.data);
         axios
-          .get("http://localhost:3000/api/colors/" + response.data.colorId)
+          .get(`http://${url}/api/colors/` + response.data.colorId)
           .then((response) => setColor(response.data.name))
           .catch(err => setColor(""))
         axios
           .get(
-            "http://localhost:3000/api/manufacturers/" +
+            `http://${url}/api/manufacturers/` +
             response.data.manufacturerId
           )
           .then((response) => setManufacturer(response.data))
           .catch(err => setManufacturer(""))
         axios
           .get(
-            "http://localhost:3000/api/subcategories/" +
+            `http://${url}/api/subcategories/` +
             response.data.subcategoryId
           )
           .then((response) => setCategory(response.data.name))

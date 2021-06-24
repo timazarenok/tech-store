@@ -6,6 +6,8 @@ import { NotificationManager } from 'react-notifications';
 
 import "./manufacturers.css";
 
+const url = "84.201.178.27:3000";
+
 const Manufacturers = () => {
   const [manufacturers, setManufacturers] = useState([]);
 
@@ -15,7 +17,7 @@ const Manufacturers = () => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/manufacturers")
+      .get(`http://${url}/api/manufacturers`)
       .then((response) => setManufacturers(response.data))
       .catch((err) => console.log(err));
   };
@@ -28,7 +30,7 @@ const Manufacturers = () => {
 
   const addNew = () => {
     axios
-      .post("http://localhost:3000/api/manufacturers/add", manufacturer)
+      .post(`http://${url}/api/manufacturers/add`, manufacturer)
       .then((response) => {
         NotificationManager.success('Производитель был успешно добавлен', "Успех")
         updateData();
@@ -49,7 +51,7 @@ const Manufacturers = () => {
 
   const onDelete = (id) => {
     axios
-      .delete("http://localhost:3000/api/manufacturers/" + id)
+      .delete(`http://${url}/api/manufacturers/` + id)
       .then((reposnse) => updateData())
       .catch((err) => updateData());
   };

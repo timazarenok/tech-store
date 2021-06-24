@@ -4,6 +4,8 @@ import axios from "axios";
 import "./cart-item.css";
 import { DashCircle, PlusCircle, XCircle } from "react-bootstrap-icons";
 
+const url = "84.201.178.27:3000";
+
 const CartItem = ({ id, count, onPlus, onMinus, onRemove }) => {
   const [data, setData] = useState({
     id: id,
@@ -14,7 +16,7 @@ const CartItem = ({ id, count, onPlus, onMinus, onRemove }) => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/products/" + id).then((response) => {
+    axios.get(`http://${url}/api/products/` + id).then((response) => {
       setData({ ...response.data, count: count });
     });
   }, [data.name.length != 0, count, id]);

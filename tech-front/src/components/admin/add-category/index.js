@@ -6,6 +6,9 @@ import { NotificationManager } from 'react-notifications';
 
 import "./add-category.css";
 
+const url = "84.201.178.27:3000";
+`http://${url}/`;
+
 const AddCategory = () => {
   const [categories, setCategories] = useState([]);
 
@@ -15,7 +18,7 @@ const AddCategory = () => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/categories")
+      .get(`http://${url}/api/categories`)
       .then((response) => setCategories(addEmpty(response.data)))
       .catch((err) => console.log(err));
   };
@@ -24,7 +27,7 @@ const AddCategory = () => {
 
   const addNew = () => {
     axios
-      .post("http://localhost:3000/api/categories/add", { name: category })
+      .post(`http://${url}/api/categories/add`, { name: category })
       .then((response) => {
         NotificationManager.success('Категория была успешно добавлена', "Успех")
         updateData();
@@ -40,7 +43,7 @@ const AddCategory = () => {
 
   const addNewSub = () => {
     axios
-      .post("http://localhost:3000/api/subcategories/add", subCategory)
+      .post(`http://${url}/api/subcategories/add`, subCategory)
       .then((response) => {
         updateData();
         setSubCategory({ name: "", categoryId: categories[0] === undefined ? 1 : categories[0].id });
@@ -58,7 +61,7 @@ const AddCategory = () => {
 
   const onDelete = (id) => {
     axios
-      .delete("http://localhost:3000/api/categories/" + id)
+      .delete(`http://${url}/api/categories` + id)
       .then((reposnse) => updateData())
       .catch((err) => updateData());
   };

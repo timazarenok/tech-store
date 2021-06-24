@@ -4,15 +4,17 @@ import { Link } from 'react-router-dom'
 
 import './catalog.css'
 
+const url = "84.201.178.27:3000";
+
 const Catalog = (props) => {
     const [categories, setCategories] = useState([])
     const [subcategories, setSubCategories] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:3000/api/categories")
+        axios.get(`http://${url}/api/categories`)
             .then(response => setCategories(response.data))
             .catch(err => console.log(err))
-        axios.get("http://localhost:3000/api/subcategories")
+        axios.get(`http://${url}/api/subcategories`)
             .then(response => setSubCategories(response.data))
             .catch(err => console.log(err))
     }, [categories.length, subcategories.length])

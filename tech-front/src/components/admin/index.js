@@ -11,6 +11,8 @@ import "./admin.css";
 import AddDelivery from "./add-delivery";
 import AddCategory from "./add-category";
 
+const url = "84.201.178.27:3000";
+
 const Admin = () => {
   const [colors, setColors] = useState([]);
   const [manufacturers, setManufacturers] = useState([]);
@@ -23,19 +25,19 @@ const Admin = () => {
 
   const updateData = () => {
     axios
-      .get("http://localhost:3000/api/colors")
+      .get(`http://${url}/api/colors`)
       .then((response) => setColors(response.data))
       .catch((err) => console.log(err));
     axios
-      .get("http://localhost:3000/api/manufacturers")
+      .get(`http://${url}/api/manufacturers`)
       .then((response) => setManufacturers(response.data))
       .catch((err) => console.log(err));
     axios
-      .get("http://localhost:3000/api/deliveries")
+      .get(`http://${url}/api/deliveries`)
       .then((response) => setDeliveries(response.data))
       .catch((err) => console.log(err));
     axios
-      .get("http://localhost:3000/api/categories")
+      .get(`http://${url}/api/categories`)
       .then((response) => setCategories(response.data))
       .catch((err) => console.log(err));
     };

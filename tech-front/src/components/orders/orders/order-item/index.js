@@ -8,14 +8,14 @@ const OrderItem = ({ id, telephone, address, status, deliveryId, products, updat
 
   const setStatus = () => {
     axios
-    .put("http://localhost:3000/api/update/"+id, {status: !status})
+    .put(`http://${url}//api/update/`+id, {status: !status})
     .then((response) => updateData())
     .catch(err => console.log(err))
   }
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/deliveries/"+deliveryId)
+      .get(`http://${url}//api/deliveries/`+deliveryId)
       .then((response) => {
         if(response.data) {
           setDelivery(response.data)

@@ -9,6 +9,8 @@ import { NotificationManager } from 'react-notifications';
 
 import "./cart.css";
 
+const url = "84.201.178.27:3000";
+
 const Cart = (props) => {
   const { cart_items, totalCount, totalPrice } = useSelector(
     (state) => state.cart
@@ -22,7 +24,7 @@ const Cart = (props) => {
   const [deliveries, setDeliveries] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/deliveries/")
+    axios.get(`http://${url}/api/deliveries/`)
     .then(resposne => {
       setDeliveries(resposne.data);
       setId(resposne.data[0].id);
@@ -43,12 +45,12 @@ const Cart = (props) => {
       return;
     }
     axios
-      .post("http://localhost:3000/api/add", order)
+      .post(`http://${url}/api/add`, order)
       .then((res) => {
         setAddress("");
         setTelephone("");
         cart_items.map(el => {
-          axios.post(`http://localhost:3000/api/orders/${res.data.id}/add-product/${el.id}`, {count: el.count})
+          axios.post(`http://${url}/api/orders/${res.data.id}/add-product/${el.id}`, {count: el.count})
           .then(res => console.log(res.data))
           .catch(err => console.log(err))
         })
