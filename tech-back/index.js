@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 // Connect to MongoDB
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
+  user: 'sammy',
   password: 'tima2002',
   database: 'tech'
 });
