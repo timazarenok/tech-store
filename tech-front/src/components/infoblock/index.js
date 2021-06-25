@@ -13,13 +13,13 @@ const InfoBlock = () => (
       <div className="col-md-6 team-img">
         <img className="img-big" src={box1} alt="sales" />
         <figcaption className="overlay">
-          <Button className="sale-button">Подробнее</Button>
+          <Button className="sale-button"><Link to="http://84.201.178.27:8000/catalog/1">Подробнее</Link></Button>
         </figcaption>
       </div>
       <div className="col-md-6 team-img">
         <img className="img-big" src={box2} alt="sales" />
         <figcaption className="overlay">
-          <Button className="sale-button">Подробнее</Button>
+          <Button className="sale-button"><Link to="http://84.201.178.27:8000/catalog/2">Подробнее</Link></Button>
         </figcaption>
       </div>
     </div>
@@ -33,13 +33,13 @@ const InfoBlock = () => (
       <div className="col-md-4 team-img">
         <img className="img-small" src={box5} alt="sales" />
         <figcaption className="overlay">
-          <Button className="sale-button">Подробнее</Button>
+          <Button className="sale-button"><Link to="http://84.201.178.27:8000/catalog/3">Подробнее</Link></Button>
         </figcaption>
       </div>
       <div className="col-md-4 team-img">
         <img className="img-small" src={box6} alt="sales" />
         <figcaption className="overlay">
-          <Button className="sale-button">Подробнее</Button>
+          <Button className="sale-button"><Link to="http://84.201.178.27:8000/catalog/3">Подробнее</Link></Button>
         </figcaption>
       </div>
     </div>

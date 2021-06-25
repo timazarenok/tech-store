@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
     case GET_ERRORS:
       return {
         ...state,
-        errors: { ...state.errors, ...action.payload.data },
+        errors: { ...state.errors },
       };
     default:
       return state;
