@@ -7,7 +7,6 @@ import { NotificationManager } from 'react-notifications';
 import "./add-category.css";
 
 const url = "84.201.178.27:3000";
-`http://${url}/`;
 
 const AddCategory = () => {
   const [categories, setCategories] = useState([]);

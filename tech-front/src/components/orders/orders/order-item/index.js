@@ -3,6 +3,8 @@ import { Card, ListGroup, Button } from "react-bootstrap";
 import axios from 'axios'
 import "./order-item.css";
 
+const url = "84.201.178.27:8000";
+
 const OrderItem = ({ id, telephone, address, status, deliveryId, products, updateData }) => {
   const [delivery, setDelivery] = useState({name: ""})
 
